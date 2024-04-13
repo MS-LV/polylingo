@@ -1,0 +1,1 @@
+function n(e,t){return!e||!t?!1:(e=r(e),t=r(t),e===t)}function r(e){return e?(e=e.toLowerCase(),e=e.replace(/\s+/gi," "),e=e.replace(/<[^>]*>?/gi," "),e=e.replace(/__+/gi,"____"),e):""}function u(e){return e?(window.URL??window.webkitURL).createObjectURL(e):""}function c(e,t){if(!e||!t)return!1;let o=new RegExp(t,"gi");return!!e.match(o)}export{n as a,r as b,u as c,c as d};

@@ -1,1 +1,0 @@
-import{da as m}from"./chunk-VVHKCFJL.js";var n={fullName:{min:1,max:30},email:{min:1,max:35},password:{min:4,max:16},description:{min:0,max:1e3}},i=new m("users.config",{factory:()=>n});export{i as a};
