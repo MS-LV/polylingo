@@ -1,0 +1,1 @@
+import{da as m}from"./chunk-E25BKHHC.js";var o={fullName:{min:1,max:30},email:{min:1,max:35},password:{min:4,max:16},description:{min:0,max:1e3}},i=new m("users.form.config",{factory:()=>o});export{o as a,i as b};
