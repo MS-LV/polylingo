@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  width: 100%;
+}
+.avatar {
+  display: block;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+div {
+  width: min-content;
+}

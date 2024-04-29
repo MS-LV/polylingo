@@ -1,0 +1,64 @@
+<table mat-table matSort aria-label="Elements">
+  @if(avatar()) {
+    <ng-container [matColumnDef]="avatar()!.property">
+        <th *matHeaderCellDef mat-header-cell>{{avatar()!.header | titlecase}}</th>
+        <td *matCellDef="let element" mat-cell>
+            @if (element[avatar()!.property]) {
+              <img
+                class="avatar"
+                loading="lazy"
+                alt=""
+                [matTooltip]="avatar()!.tooltip"
+                [matTooltipPosition]="materialConfig.tooltip.position"
+                [matTooltipShowDelay]="materialConfig.tooltip.showDelay"
+                [matTooltipHideDelay]="materialConfig.tooltip.hideDelay"
+                [src]="element[avatar()!.property]" 
+                />
+            }
+        </td>
+      </ng-container> 
+  }
+
+  @for(column of columns(); track column.property) {
+    <ng-container [matColumnDef]="column.property">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>{{column.header | titlecase}}</th>
+      <td *matCellDef="let element" mat-cell>
+        <div
+          [matTooltip]="column.tooltip"
+          [matTooltipPosition]="materialConfig.tooltip.position"
+          [matTooltipShowDelay]="materialConfig.tooltip.showDelay"
+          [matTooltipHideDelay]="materialConfig.tooltip.hideDelay" 
+        >{{ element[column.property] | titlecase }}</div>
+        
+      </td>
+    </ng-container>
+  }
+
+  <ng-container [matColumnDef]="identify().property">
+      <th *matHeaderCellDef mat-header-cell>{{identify().header | titlecase}}</th>
+      <td *matCellDef="let element" mat-cell>
+        <button
+          mat-icon-button
+          [matTooltip]="identify().tooltip"
+          [matTooltipPosition]="materialConfig.tooltip.position"
+          [matTooltipShowDelay]="materialConfig.tooltip.showDelay"
+          [matTooltipHideDelay]="materialConfig.tooltip.hideDelay"
+          [routerLink]="[element[identify().property]]"
+          (click)="action(element[identify().property])">
+          <mat-icon>open_in_new</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+  <tr *matHeaderRowDef="tableColumns()" mat-header-row></tr>
+  <tr *matRowDef="let row; columns: tableColumns()" mat-row></tr>
+</table>
+
+<mat-paginator
+  #paginator
+  aria-label="Select page"
+  [length]="list().length || 0"
+  [pageIndex]="0"
+  [pageSize]="10"
+  [pageSizeOptions]="pageSizeOptions()">
+</mat-paginator>

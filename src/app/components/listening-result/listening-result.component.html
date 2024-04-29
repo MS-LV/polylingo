@@ -1,0 +1,11 @@
+@for(audio of audios(); track audio) {
+<mat-card>
+  <mat-card-content>
+    <audio [src]="audio" #audio data-repeated="0" controls></audio>
+  </mat-card-content>
+</mat-card>
+} @empty {
+  <p class="mat-body-1">No Audio File</p>
+}
+
+<comp-variants-form [formGroup]="formGroup()"></comp-variants-form>

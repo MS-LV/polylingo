@@ -1,0 +1,84 @@
+<form novalidate [formGroup]="formGroup()" (ngSubmit)="onSubmit()">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Settings</mat-card-title>
+      <mat-card-subtitle>Control settings of application</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      @for (field of formFields(); track field.id) {
+        <mat-form-field floatLabel="always">
+          <mat-label> {{ field.label }}</mat-label>
+          <input
+            matInput
+            class="align-right"
+            [type]="field.type"
+            [formControlName]="field.formControlName"
+            [placeholder]="field.placeholder"
+            [min]="field.config.min"
+            [max]="field.config.max" />
+
+          @if (formGroup().get(field.formControlName)!.hasError('max')) {
+            <mat-error>
+              Maximum number must be {{ field.config.max }}
+            </mat-error>
+          }
+          @if (formGroup().get(field.formControlName)!.hasError('min')) {
+            <mat-error>
+              Minimum number must be {{ field.config.min }}
+            </mat-error>
+          }
+          <span matTextPrefix
+            ><mat-icon>{{ field.prefix }}</mat-icon> &nbsp;</span
+          >
+          <span matTextSuffix>{{ field.suffix }}</span>
+        </mat-form-field>
+      }
+      <mat-form-field>
+        <mat-label>Special Password</mat-label>
+        <input
+          matInput
+          formControlName="specialPassword"
+          [type]="hidePassword() ? 'password' : 'text'" />
+        <span matTextPrefix><mat-icon>key</mat-icon> &nbsp;</span>
+        @if (formGroup().get('specialPassword')!.hasError('maxlength')) {
+          <mat-error>
+            Maximum symbol must be <b>{{ formConfig.specialPassword.max }}</b>
+          </mat-error>
+        }
+        @if (formGroup().get('specialPassword')!.hasError('minlength')) {
+          <mat-error>
+            Minimum symbol must be <b>{{ formConfig.specialPassword.min }}</b>
+          </mat-error>
+        }
+        @if (formGroup().get('specialPassword')!.hasError('required')) {
+          <mat-error>Special password is <b>required</b></mat-error>
+        }
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hidePassword()"
+          (click)="passwordVisibility()">
+          <mat-icon>{{
+            hidePassword() ? 'visibility' : 'visibility_off'
+          }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button 
+        mat-raised-button 
+        color="primary" 
+        type="submit" 
+        [disabled]="formGroup().invalid">Submit</button>
+      <button 
+        mat-raised-button 
+        color="warn" 
+        type="reset" 
+        (clicik)="reset()">
+        Reset
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

@@ -1,0 +1,52 @@
+:host {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+.toolbar-icon {
+  scale: 1.5;
+  border-radius: 50%;
+  border: 1px solid white;
+  max-width: 100%;
+  object-fit: cover;
+}
+mat-toolbar {
+  flex: 0 0 64px;
+}
+mat-drawer-container {
+  flex-grow: 1;
+}
+.sidenav {
+  background: var(--prime-color);
+}
+.mat-list-item {
+  color: white;
+}
+mat-drawer {
+  max-width: 50%;
+  width: 200px;
+}
+mat-drawer button {
+  width: 100%;
+  display: block;
+}
+.menu-item {
+  font-size: 18px;
+  justify-content: flex-start !important;
+  width: 100%;
+  &.active {
+    color: #fff !important;
+  }
+}
+mat-drawer-content {
+  display: flex;
+  overflow-x: hidden;
+}

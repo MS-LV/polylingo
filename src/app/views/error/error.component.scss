@@ -1,0 +1,16 @@
+@import url('@/styles/full-size-component.scss');
+$icon-size: 200px;
+
+div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.main-icon {
+  font-size: $icon-size;
+  width: $icon-size;
+  height: $icon-size;
+}

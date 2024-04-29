@@ -1,0 +1,25 @@
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+mat-radio-group {
+  display: flex;
+  flex-direction: column;
+}
+mat-form-field {
+  width: 100%;
+}
+mat-spinner {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+audio {
+  width: 100%;
+  & + & {
+    margin-top: 10px;
+  }
+}
+.main-actions {
+  justify-content: space-between;
+}

@@ -1,0 +1,192 @@
+<form [formGroup]="formGroup()">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <input
+        #f_input
+        id="user_photo"
+        type="file"
+        hidden
+        accept="image/*"
+        (change)="onInputFileChange(f_input)" />
+      <label
+        matTooltip="Upload cover image for document"
+        mat-card-avatar
+        for="user_photo"
+        [matTooltipPosition]="materialConfig.tooltip.position"
+        [matTooltipShowDelay]="materialConfig.tooltip.showDelay"
+        [matTooltipHideDelay]="materialConfig.tooltip.hideDelay">
+        @if (coverUrl() && formCoverFile().value) {
+          <img alt="" [src]="coverUrl()" />
+        } @else {
+          <img src="assets/dictionary.png" alt="" />
+        }
+        <div class="hover-icon">
+          <mat-icon>edit</mat-icon>
+        </div>
+      </label>
+      <mat-card-title>Mumina Solieva</mat-card-title>
+      <mat-card-title class="card-right">
+        <button
+          mat-mini-fab
+          [color]="!isReadOnly() ? 'primary' : ''"
+          (click)="isReadOnly.set(!isReadOnly())">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-card-title>
+      <mat-card-subtitle>
+        ID: a562swd2ql109
+        <button
+          mat-icon-button
+          class="copy-button"
+          [cdkCopyToClipboard]="'Hello World !'">
+          <mat-icon>content_copy</mat-icon>
+        </button>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Full Name</mat-label>
+        <input
+          matInput
+          formControlName="fullName"
+          required
+          [readonly]="isReadOnly()" />
+        @if (formGroup().get('fullName')!.hasError('required')) {
+          <mat-error
+            >Full Name is
+            <strong>required</strong>
+          </mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          formControlName="email"
+          list="emailTypes"
+          required
+          placeholder="example@gmail.com"
+          [readonly]="isReadOnly()"
+          (input)="onEmailInput()" />
+        @if (formGroup().get('email')!.hasError('required')) {
+          <mat-error
+            >email name is
+            <strong>required</strong>
+          </mat-error>
+        }
+        @if (formGroup().get('email')!.hasError('email')) {
+          <mat-error
+            >incorrect syntax
+            <strong>email</strong>
+          </mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          formControlName="password"
+          [type]="isHide() ? 'password' : 'text'"
+          [readonly]="isReadOnly()"
+          [minlength]="usersFormConfig.password.min"
+          [maxlength]="usersFormConfig.password.max" />
+        <button
+          type="button"
+          mat-icon-button
+          matSuffix
+          [attr.aria-label]="'Hide password'"
+          (click)="isHide.set(!isHide())">
+          <mat-icon>{{ isHide() ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        @if (formGroup().get('password')!.hasError('required')) {
+          <mat-error>Fill <b>Password</b> field</mat-error>
+        }
+        @if (formGroup().get('password')!.hasError('minlength')) {
+          <mat-error
+            >Password minimum length
+            <b>{{ usersFormConfig.password.min }}</b> symbols</mat-error
+          >
+        }
+        @if (formGroup().get('password')!.hasError('maxlength')) {
+          <mat-error
+            >Password maximum length
+            <b>{{ usersFormConfig.password.max }}</b> symbols</mat-error
+          >
+        }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Role</mat-label>
+        @if (isReadOnly()) {
+          <input matInput formControlName="role" required readonly />
+        } @else {
+          <mat-select formControlName="role" required>
+            @for (role of Object.values(roles()); track role) {
+              <mat-option [value]="role">{{ role | titlecase }}</mat-option>
+            }
+          </mat-select>
+        }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Level</mat-label>
+        @if (isReadOnly()) {
+          <input matInput formControlName="level" required readonly />
+        } @else {
+          <mat-select
+            formControlName="level"
+            required
+            [panelClass]="isReadOnly() ? 'hidden' : ''">
+            @for (level of Object.values(levels()); track level) {
+              <mat-option [value]="level">{{ level | titlecase }}</mat-option>
+            }
+          </mat-select>
+        }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          rows="5"
+          formControlName="description"
+          placeholder="Write about youself"
+          [minlength]="usersFormConfig.description.min"
+          [maxlength]="usersFormConfig.description.max"
+          [readonly]="isReadOnly()"></textarea>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-card-actions>
+        <button
+          mat-icon-button
+          type="submit"
+          color="primary"
+          [disabled]="!isFormChanges() || formGroup().invalid">
+          <mat-icon>save</mat-icon>
+        </button>
+        <button mat-icon-button color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+  </mat-card>
+</form>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<datalist id="emailTypes">
+  @for (email of emailTypes(); track email.name) {
+    <option [value]="emailField()[0] + email.value">{{ email.name }}</option>
+  }
+</datalist>

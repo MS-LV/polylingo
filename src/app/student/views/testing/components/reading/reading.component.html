@@ -1,0 +1,6 @@
+@for(text of readTexts(); track text) {
+<p class="mat-body-1">{{text}}</p>
+}
+<comp-questions-form
+  [formGroup]="formGroup()"
+  (valueChange)="submit()"></comp-questions-form>

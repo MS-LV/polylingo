@@ -1,0 +1,157 @@
+<form [formGroup]="formGroup()" (ngSubmit)="onSubmit()">
+  <h2 mat-dialog-title>New User</h2>
+  <mat-dialog-content>
+    @if (avatarUrl() || formAvatar().value) {
+      <div class="avatar-image">
+        <img alt="" [src]="avatarUrl() || formAvatar().value" />
+      </div>
+    }
+    <mat-form-field>
+      <mat-label>Avatar</mat-label>
+      <button
+        type="button"
+        mat-icon-button
+        matPrefix
+        matTooltip="Upload cover image for document"
+        [matTooltipPosition]="materialConfig.tooltip.position"
+        [matTooltipShowDelay]="materialConfig.tooltip.showDelay"
+        [matTooltipHideDelay]="materialConfig.tooltip.hideDelay"
+        (click)="f_input.click()">
+        <mat-icon>add_photo_alternate</mat-icon>
+      </button>
+      <input type="text" readonly matInput [value]="avatarName" />
+      <input
+        #f_input
+        type="file"
+        multiple
+        hidden
+        accept="image/*"
+        (change)="onInputFileChange(f_input)" />
+      <mat-error>this field is required</mat-error>
+    </mat-form-field>
+    <!--  -->
+    <mat-form-field>
+      <mat-label>Full Name</mat-label>
+      <input
+        matInput
+        formControlName="fullName"
+        [minlength]="usersFormConfig.fullName.min"
+        [maxlength]="usersFormConfig.fullName.max" />
+      @if (formGroup().get('fullName')!.hasError('required')) {
+        <mat-error>Fill <b>Full Name</b> field</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        list="emailTypes"
+        matInput
+        formControlName="email"
+        [minlength]="usersFormConfig.email.min"
+        [maxlength]="usersFormConfig.email.max"
+        (input)="onEmailInput()" />
+      @if (formGroup().get('email')!.hasError('required')) {
+        <mat-error>Fill <b>Email</b> field</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        formControlName="password"
+        [type]="isHide() ? 'password' : 'text'"
+        [minlength]="usersFormConfig.password.min"
+        [maxlength]="usersFormConfig.password.max" />
+      <button
+        type="button"
+        mat-icon-button
+        matSuffix
+        [attr.aria-label]="'Hide password'"
+        (click)="isHide.set(!isHide())">
+        <mat-icon>{{ isHide() ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+      @if (formGroup().get('password')!.hasError('required')) {
+        <mat-error>Fill <b>Password</b> field</mat-error>
+      }
+      @if (formGroup().get('password')!.hasError('minlength')) {
+        <mat-error
+          >Password minimum length
+          <b>{{ usersFormConfig.password.min }}</b> symbols</mat-error
+        >
+      }
+      @if (formGroup().get('password')!.hasError('maxlength')) {
+        <mat-error
+          >Password maximum length
+          <b>{{ usersFormConfig.password.max }}</b> symbols</mat-error
+        >
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="role" required>
+        @for (role of Object.values(roles()); track role) {
+          <mat-option [value]="role">{{ role | titlecase }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Level</mat-label>
+      <mat-select formControlName="level" required>
+        @for (level of Object.values(levels()); track level) {
+          <mat-option [value]="level">{{ level | titlecase }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        rows="10"
+        formControlName="description"
+        placeholder="Description of question"
+        [minlength]="usersFormConfig.description.min"
+        [maxlength]="usersFormConfig.description.max"></textarea>
+      @if (formGroup().get('description')!.hasError('required')) {
+        <mat-error>Fill <b>Password</b> field</mat-error>
+      }
+    </mat-form-field>
+
+    <p style="color: transparent; user-select: none">
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam, nemo.
+      Laboriosam ipsa molestiae voluptatem quasi? Id reiciendis, ut repellat
+      consequatur sapiente voluptatibus temporibus, modi ullam quas sit, amet
+      est consequuntur.
+    </p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <!-- <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button> -->
+    <button
+      mat-raised-button
+      color="warn"
+      type="reset"
+      [disabled]="formGroup().untouched">
+      Reset
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [mat-dialog-close]="formGroup().value"
+      [disabled]="formGroup().invalid">
+      Submit
+    </button>
+  </mat-dialog-actions>
+</form>
+
+<datalist id="emailTypes">
+  @for (email of emailTypes(); track email.name) {
+    <option [value]="emailField()[0] + email.value">{{ email.name }}</option>
+  }
+</datalist>

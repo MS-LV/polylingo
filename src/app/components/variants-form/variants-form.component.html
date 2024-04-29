@@ -1,0 +1,21 @@
+<form [formGroup]="formGroup()">
+<div formArrayName="questionList">
+  @for(question of questionList().value; track question.description) {
+    <mat-card [formGroupName]="$index">
+      <mat-card-header>
+        <mat-card-title>{{$index + 1}}. {{question.description}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-radio-group formControlName="userAnswer" [color]="question.userAnswer === question.answer ? 'primary' : 'warn'">
+          @for(variant of question.neither; track variant) {
+            <mat-radio-button [value]="variant" [class.correct]="question.answer === variant">
+            {{variant}}
+            </mat-radio-button>
+          }
+        </mat-radio-group>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>
+</form>
+

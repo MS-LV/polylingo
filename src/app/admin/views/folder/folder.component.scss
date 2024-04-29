@@ -1,0 +1,22 @@
+@import url('@/styles/full-size-component.scss');
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 10px;
+}
+.card-background {
+  font-size: 250px;
+  height: 250px;
+  width: 100%;
+  margin: 0 auto;
+  object-fit: cover;
+}
+mat-card {
+  flex: 0 0 350px;
+  margin: 0 auto;
+}
+
+mat-card-content {
+  flex: 1 1 auto;
+}

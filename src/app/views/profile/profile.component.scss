@@ -1,0 +1,62 @@
+@import url('@/styles/full-size-component.scss');
+
+form {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.copy-icon {
+  font-size: 15px;
+  height: 15px;
+  width: 15px;
+}
+
+mat-card-title {
+  display: inline;
+}
+mat-card-header ::ng-deep .mat-mdc-card-header-text {
+  width: 100%;
+}
+.card-right {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 8px;
+}
+label[for='user_photo'] {
+  position: relative;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+  &:hover .hover-icon {
+    opacity: 1;
+  }
+}
+.hover-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba($color: #000000, $alpha: 0.5);
+  color: white;
+  opacity: 0;
+  transition: 0.3s;
+  overflow: hidden;
+}
+
+label img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+.hidden {
+  display: none;
+}

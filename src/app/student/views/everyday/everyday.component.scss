@@ -1,0 +1,11 @@
+@import url('@/styles/full-size-component.scss');
+
+.title {
+  text-align: center;
+}
+.buttons {
+  margin-top: 5px;
+}
+::ng-deep .mat-step-header {
+  pointer-events: none !important;
+}

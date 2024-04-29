@@ -1,0 +1,70 @@
+<form [formGroup]="formGroup()" (ngSubmit)="submit()">
+  <div class="mat-headline-4 title">Everyday: Lessone 1 - Title of Book</div>
+  <mat-stepper orientation="vertical" formArrayName="questionList">
+    @for (
+      question of questionList();
+      track question;
+    ) {
+      <mat-step
+        errorMessage="Incorrect answer"
+        [formGroupName]="$index"
+        [editable]="false">
+        <ng-template matStepLabel>
+          {{formArray()!.get('' + $index)!.value.userAnswer}}
+        </ng-template>
+        <ng-template matStepContent>
+          <h1 class="mat-title">
+            {{ question.tajik | titlecase }} -
+            {{ question.russian | titlecase }}
+          </h1>
+          <mat-form-field>
+            <mat-label>Type answer question</mat-label>
+            <input
+              matInput
+              [autofocus]="true"
+              formControlName="userAnswer"
+              (keydown.enter)="onInputEnter($event, $index)"
+              (input)="input($event)" />
+            @if (isValidField($index)) {
+              <mat-error>answer is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+          <div class="buttons">
+            @if (!$first) {
+              <button type="button" mat-button matStepperPrevious accesskey="z">
+                Back
+              </button>
+            }
+            @if (!$last) {
+              <button
+                type="button"
+                mat-raised-button
+                color="primary"
+                matStepperNext
+                [disabled]="
+                  formGroup().get('questionList')!.get('' + $index)!.invalid
+                ">
+                Next
+              </button>
+            } @else {
+              <button
+                type="submit"
+                mat-raised-button
+                color="primary"
+                matStepperNext
+                [disabled]="formArray().invalid">
+                Submit
+              </button>
+            }
+          </div>
+        </ng-template>
+      </mat-step>
+    } @empty {
+      Empty list of Questions
+    }
+
+    <ng-template matStepperIcon="error">
+      <mat-icon>cancel</mat-icon>
+    </ng-template>
+  </mat-stepper>
+</form>

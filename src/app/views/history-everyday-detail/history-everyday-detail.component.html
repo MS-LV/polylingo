@@ -1,0 +1,19 @@
+@if(formGroup()) {
+  <!-- @if(formGroup()!.get('avatar')?.value) {
+    <img [src]="formGroup()!.get('avatar')!.value" class="avatar" alt="">
+  } -->
+  @if(score()) {
+    <div class="score">  
+      <mat-progress-spinner
+        color="primary"
+        mode="determinate"
+        [value]="score()!.answered / score()!.total * 100"></mat-progress-spinner>
+      <h1 class="mat-h1">{{score()!.answered / score()!.total | percent: '2.0-0'}}</h1>
+    </div>
+  <h1 class="mat-headline-1 text-center">{{score()!.answered}} / {{score()!.total}}</h1>
+  }
+  @if(formGroup()!.get('description')?.value) {
+    <p class="mat-body-1">{{formGroup()!.get('description')?.value}}</p>
+  }
+  <comp-dictionary-result [formGroup]="formGroup()!"></comp-dictionary-result>
+}

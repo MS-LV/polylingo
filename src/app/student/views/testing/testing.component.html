@@ -1,0 +1,17 @@
+@if(formGroup() && activitiesStep()) {
+<form [formGroup]="formGroup()" (ngSubmit)="submit()">
+  <mat-stepper orientation="vertical" [linear]="false">
+    @for(step of activitiesStep(); track step._id) {
+      <mat-step [editable]="false">
+        <ng-template matStepLabel>{{step.label | titlecase}}</ng-template>
+        <ng-template matStepContent>
+          <ng-template
+            *ngComponentOutlet="step.component; inputs: step.inputs" />
+        </ng-template>
+      </mat-step>
+    }
+  </mat-stepper>
+</form>
+}
+
+

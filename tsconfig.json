@@ -1,0 +1,50 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@admin/*": ["app/admin/*"],
+      "@student_components/*": ["app/student/components/*"],
+      "@student_views/*": ["app/student/views/*"],
+      "@student_directives/*": ["app/student/directives/*"],
+      "@student/*": ["app/student/*"],
+      "@constants/*": ["app/constants/*"],
+      "@components/*": ["app/components/*"],
+      "@configs/*": ["app/configs/*"],
+      "@directives/*": ["app/directives/*"],
+      "@utils/*": ["app/utils/*"],
+      "@views/*": ["app/views/*"],
+      "@/*": ["app/*"],
+    },
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "declaration": false,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": [
+      "ES2022",
+      "dom",
+      "ES2015"
+    ],
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": true,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  },
+}
+/* To learn more about this file see: https://angular.io/config/tsconfig. */

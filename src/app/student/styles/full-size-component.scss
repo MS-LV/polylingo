@@ -1,0 +1,9 @@
+:host {
+  flex: 0 0 100vw;
+  overflow-x: hidden;
+}
+@media screen and (min-width: 960px) {
+  :host {
+    flex: 1 1 auto;
+  }
+}

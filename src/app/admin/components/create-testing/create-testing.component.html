@@ -1,0 +1,92 @@
+<form novalidate [formGroup]="formGroup()" (ngSubmit)="onSubmit()">
+  <h2 mat-dialog-title>Testing Questions</h2>
+  <mat-dialog-content>
+    @if (avatarUrl() || formAvatar().value) {
+      <div class="avatar-image">
+        <img alt="" [src]="avatarUrl() || formAvatar().value" />
+      </div>
+    }
+    <mat-form-field>
+      <mat-label>Files Name</mat-label>
+      <button
+        matTooltip="Upload cover image for document"
+        mat-icon-button
+        type="button"
+        matPrefix
+        [matTooltipPosition]="materialConfig.tooltip.position"
+        [matTooltipShowDelay]="materialConfig.tooltip.showDelay"
+        [matTooltipHideDelay]="materialConfig.tooltip.hideDelay"
+        (click)="f_input.click()">
+        <mat-icon>add_photo_alternate</mat-icon>
+      </button>
+      <input type="text" readonly matInput [value]="avatarName" />
+      <input
+        #f_input
+        type="file"
+        multiple
+        hidden
+        accept="image/*"
+        (change)="onInputFileChange(f_input)" />
+      <mat-error>this field is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-icon matPrefix>label</mat-icon>
+      <mat-label>Label</mat-label>
+      <input
+        matInput
+        formControlName="label"
+        placeholder="Write label of document" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+        rows="10"
+        placeholder="Write description of document"></textarea>
+    </mat-form-field>
+
+    <mat-accordion>
+      @for (expand of activitiesExpansion(); track expand.id) {
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ expand.title }}</mat-panel-title>
+            <mat-panel-description>
+              {{ expand.description }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <ng-template
+            *ngComponentOutlet="expand.component; inputs: expand.inputs" />
+        </mat-expansion-panel>
+      }
+    </mat-accordion>
+
+    <p style="color: transparent; user-select: none">
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam, nemo.
+      Laboriosam ipsa molestiae voluptatem quasi? Id reiciendis, ut repellat
+      consequatur sapiente voluptatibus temporibus, modi ullam quas sit, amet
+      est consequuntur.
+    </p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <!-- <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button> -->
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [mat-dialog-close]="formGroup().value"
+      [disabled]="formGroup().invalid">
+      Submit
+    </button>
+    <button
+      mat-raised-button
+      color="warn"
+      type="reset"
+      [disabled]="formGroup().untouched"
+      (click)="reset()">
+      Reset
+    </button>
+  </mat-dialog-actions>
+</form>

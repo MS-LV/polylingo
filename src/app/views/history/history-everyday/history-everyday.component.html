@@ -1,0 +1,7 @@
+<comp-table 
+  [list]="historyList()" 
+  [columns]="tableData().columns" 
+  [identify]="tableData().id" 
+  [avatar]="tableData().avatar"
+  (valueChange)="onUpdateUser($event)">
+</comp-table>

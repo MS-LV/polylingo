@@ -1,0 +1,19 @@
+<form [formGroup]="formGroup()">
+  <h3 class="mat-h3">Choosed theme for assay:</h3>
+  <mat-radio-group  formControlName="theme" inert>
+    @for (theme of themes(); track theme) {
+      <mat-radio-button color="primary" [value]="theme">
+      	{{theme}}
+    	</mat-radio-button>
+    } @empty {
+      List of themes empty
+    }
+  </mat-radio-group>
+  <mat-form-field>
+    <mat-label>Assay text...</mat-label>
+    <textarea 
+        matInput
+        formControlName="assay" 
+        rows="10"></textarea>
+  </mat-form-field>
+</form>

@@ -1,0 +1,58 @@
+<form novalidate [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>LogIn</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              type="email"
+              placeholder="example@gmail.com"
+              formControlName="email"
+              list="emailTypes"
+              required
+              (input)="onEmailInput()" />
+            @if (formGroup.controls['email'].hasError('required')) {
+              <mat-error
+                >email is
+                <strong>required</strong>
+              </mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              type="password"
+              placeholder="password"
+              formControlName="password"
+              required />
+            @if (formGroup.controls['password'].hasError('required')) {
+              <mat-error>
+                password
+                <strong>required</strong>
+              </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="formGroup.invalid">
+        Submit
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>
+
+<datalist id="emailTypes">
+  @for (email of emailTypes(); track email.name) {
+    <option [value]="emailField()[0] + email.value">{{ email.name }}</option>
+  }
+</datalist>

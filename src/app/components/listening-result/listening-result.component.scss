@@ -1,0 +1,12 @@
+audio {
+	display: block;
+	width: 100%;
+}
+
+mat-card + mat-card {
+	margin-top: 8px
+}
+
+mat-card:last-of-type {
+	margin-bottom: 10px
+}

@@ -1,0 +1,83 @@
+<form #formDirective="ngForm" [formGroup]="formGroup()" (ngSubmit)="submit()">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Add Questions</mat-card-title>
+      <mat-card-subtitle>Add new question for this folder</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      @for (field of fields(); track field.title) {
+        <mat-form-field>
+          <mat-label>{{ field.title }}</mat-label>
+          <input
+            matInput
+            [formControl]="field.formControl()"
+            placeholder="{{ field.title }} of question"
+            [formatInput]="field.formControl()!" />
+          @if (field.formControl().hasError('required')) {
+            <mat-error>{{ field.title }} field is required</mat-error>
+          }
+        </mat-form-field>
+      }
+
+      <mat-list
+        matTooltip="Required tasks for adding new question"
+        [matTooltipPosition]="materialConfig.tooltip.position"
+        [matTooltipShowDelay]="materialConfig.tooltip.showDelay"
+        [matTooltipHideDelay]="materialConfig.tooltip.hideDelay">
+        @for (field of fields(); track field.title) {
+          @if (field.formControl().hasError('required')) {
+            <p>
+              <i>* Fill {{ field.title }} field</i>
+            </p>
+          } @else {
+            <s
+              ><p>
+                <i>* Fill {{ field.title }} field</i>
+              </p>
+            </s>
+          }
+        }
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        matTooltip="Clear new question form"
+        mat-raised-button
+        color="accent"
+        type="reset"
+        [matTooltipPosition]="materialConfig.tooltip.position"
+        [matTooltipShowDelay]="materialConfig.tooltip.showDelay"
+        [matTooltipHideDelay]="materialConfig.tooltip.hideDelay"
+        (click)="reset()">
+        Reset
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-nav-list align="end">
+    <button
+      matTooltip="Add question to ''Question List''"
+      mat-raised-button
+      type="submit"
+      color="primary"
+      [matTooltipPosition]="materialConfig.tooltip.position"
+      [matTooltipShowDelay]="materialConfig.tooltip.showDelay"
+      [matTooltipHideDelay]="materialConfig.tooltip.hideDelay"
+      [disabled]="formGroup().invalid">
+      {{ sumitTitle() }}
+    </button>
+    <button
+      matTooltip="Close ''add questions'' popup"
+      mat-raised-button
+      type="button"
+      color="warn"
+      [matTooltipPosition]="materialConfig.tooltip.position"
+      [matTooltipShowDelay]="materialConfig.tooltip.showDelay"
+      [matTooltipHideDelay]="materialConfig.tooltip.hideDelay"
+      (click)="close($event)">
+      Close
+    </button>
+  </mat-nav-list>
+</form>
+
+<!-- referense elements -->

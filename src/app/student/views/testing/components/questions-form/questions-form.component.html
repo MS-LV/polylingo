@@ -1,0 +1,56 @@
+<form [formGroup]="formGroup()" (ngSubmit)="submit()">
+  <mat-stepper orientation="vertical" formArrayName="questionList">
+    @for (question of questionList(); track question.description) {
+      <mat-step
+        errorMessage="Incorrect answer"
+        [editable]="false">
+        <ng-template matStepLabel>
+          {{formArray()!.get('' + $index)!.value.userAnswer}}
+        </ng-template>
+        <ng-template matStepContent [formGroupName]="$index">
+          <h1 class="mat-title">{{ question.description }}</h1>
+          <mat-radio-group
+            name="flavors"
+            formControlName="userAnswer">
+            @for (variant of question.neither; track variant) {
+              <mat-radio-button [value]="variant"
+                >{{ variant | titlecase }}
+              </mat-radio-button>
+            } @empty {
+              No variants. Some thing wrong with this question
+            }
+          </mat-radio-group>
+          <div class="buttons">
+            @if (!$last) {
+              <button
+                type="button"
+                mat-raised-button
+                color="primary"
+                matStepperNext
+                [disabled]="formArray().get('' + $index)!.invalid"
+                (click)="onNextClick()">
+                Next
+              </button>
+            } @else {
+              <button
+                type="submit"
+                mat-raised-button
+                color="primary"
+                matStepperNext
+                [disabled]="formArray()!.invalid">
+                Submit
+              </button>
+            }
+          </div>
+        </ng-template>
+      </mat-step>
+    } @empty {
+      Empty list of Questions
+    }
+
+    <ng-template matStepperIcon="error">
+      <mat-icon>cancel</mat-icon>
+    </ng-template>
+  </mat-stepper>
+</form>
+

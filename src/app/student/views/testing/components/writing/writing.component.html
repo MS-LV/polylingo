@@ -1,0 +1,37 @@
+<form [formGroup]="formGroup()" (ngSubmit)="submit()">
+  <h3 class="mat-h3">Choose your theme for assay:</h3>
+  <mat-radio-group formControlName="theme">
+    @for (theme of themes(); track theme) {
+      <mat-radio-button color="primary" [value]="theme">{{
+        theme
+      }}</mat-radio-button>
+    } @empty {
+      List of themes empty
+    }
+  </mat-radio-group>
+  <mat-form-field>
+    <mat-label>Assay text...</mat-label>
+    <textarea 
+        matInput 
+        [minLength]="config.writingSymbolLength.min"
+        [maxLength]="config.writingSymbolLength.max"
+        formControlName="assay" 
+        rows="10"></textarea>
+    @if(formAssay().hasError('required')) {
+      <mat-error>Assay field is <b>required</b></mat-error>
+    } @else if(formAssay().hasError('minlength')) {
+      <mat-error>Assay minimum must be 
+        <b>{{formAssay()!.errors!.minlength.requiredLength}}</b> symbol. 
+        Actual symbol length is <b>{{formAssay()!.errors!.minlength.actualLength}}</b>
+      </mat-error>
+    } @else if(formAssay().hasError('maxlength')) {
+      <mat-error>Assay maximum must be 
+        <b>{{formAssay()!.errors!.maxlength.requiredLength}}</b> symbol. 
+        Actual symbol length is <b>{{formAssay()!.errors!.maxlength.actualLength}}</b>
+      </mat-error>
+    }
+  </mat-form-field>
+  <br>
+  <br><br>
+  <button mat-raised-button [disabled]="formGroup().invalid" color="primary" type="submit">Finish and Save</button>
+</form>

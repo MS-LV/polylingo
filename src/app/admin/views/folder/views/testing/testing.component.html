@@ -1,0 +1,38 @@
+<h1 class="mat-headline-2 text-center">Testing Documents</h1>
+<header>
+  <mat-form-field class="example-form-field">
+    <mat-label>Search Documents</mat-label>
+    @if (searchField().value) {
+      <button matPrefix mat-icon-button (click)="searchField().reset()">
+        <mat-icon>close</mat-icon>
+      </button>
+    }
+    <input matInput type="text" #searchInput [formControl]="searchField()" />
+    <button matSuffix mat-icon-button aria-label="Search">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+  <button
+    mat-fab
+    color="primary"
+    matTooltip="Add new Document"
+    [matTooltipPosition]="materialConfig.tooltip.position"
+    [matTooltipShowDelay]="materialConfig.tooltip.showDelay"
+    [matTooltipHideDelay]="materialConfig.tooltip.hideDelay"
+    (click)="onAddTesting()">
+    <mat-icon>add</mat-icon>
+  </button>
+</header>
+
+<!-- <comp-testing-table [list]="testingList()" (valueChange)="onUpdateTesting($event)"></comp-testing-table> -->
+
+<comp-table 
+  [list]="testingList()" 
+  [columns]="tableData().columns" 
+  [identify]="tableData().id" 
+  [avatar]="tableData().avatar" 
+  [dialogComponent]="tableData().dialogComponent" 
+  [formGroup]="formGroup()" 
+  (valueChange)="onUpdateTesting($event)">
+</comp-table>
+

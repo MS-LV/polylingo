@@ -1,0 +1,21 @@
+@import url('@/styles/full-size-component.scss');
+.avatar {
+  display: block;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+.score {
+  position: relative;
+  height: 150px;
+
+  > * {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+  }
+}
