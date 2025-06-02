@@ -6,7 +6,7 @@
     "dev": "ng serve --live-reload=false",
     "dev:port": "ng s --host=192.168.123.250 --port=4400 --live-reload=false",
     "build": "ng build --configuration=production",
-    "gh-build": "ng build --configuration=production --base-href=/NAB-English-Front/",
+    "gh-build": "ng build --configuration=production --base-href=/polylingo/",
     "watch": "ng build --watch --configuration=development ",
     "test": "ng test",
     "lint": "ng lint --fix",
