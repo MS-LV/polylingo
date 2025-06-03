@@ -1,27 +1,57 @@
-# Client
+# 🌐 Polylingo — English Learning Platform
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.3.
+**Polylingo** is a modern web application for learning English through interactive lessons and tests created by **teachers**. Unlike other language apps, Polylingo allows **custom content** — teachers can import tasks from **Excel files** or create them manually using a user-friendly interface.
 
-## Development server
+> ✍️ *“Built for flexibility. Designed for all levels.”*
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+---
 
-## Code scaffolding
+## 🎯 Key Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- 📚 English lessons and tests for all levels — from beginner to expert.
+- 👨‍🏫 Content is created by instructors, not fixed or AI-generated.
+- 📥 Import tasks from Excel files or create them manually.
+- 💾 Will support user registration, progress tracking, and personalized learning paths.
+- 📱 Planned support for **Telegram Mini App** and **Progressive Web App (PWA)**.
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 🛠️ Tech Stack
 
-## Running unit tests
+| Technology        | Description                                         | Logo |
+|-------------------|-----------------------------------------------------|------|
+| **Angular**       | Frontend framework for building dynamic UI         | ![Angular](https://angular.io/assets/images/logos/angular/angular.svg) |
+| **Angular Material** | UI components library for clean design            | ![Material](https://material.angular.io/assets/img/angular-material-logo.svg) |
+| **NestJS**        | Node.js backend framework (planned)                | ![NestJS](https://docs.nestjs.com/assets/logo-small.svg) |
+| **MongoDB**       | NoSQL database for storing user data and tasks     | ![MongoDB](https://webassets.mongodb.com/_com_assets/cms/mongodb_logo1-76twgcu2dm.png) |
+| **Git & GitHub**  | Version control and open-source collaboration      | ![GitHub](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png) |
+| **GitHub Actions**| CI/CD: automatic deployment to GitHub Pages        | ![Actions](https://avatars.githubusercontent.com/u/44036562?s=200&v=4) |
+| **REST API**      | Communication between frontend and backend         | 🌐 |
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## 🧪 Skills Demonstrated
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- Clean architecture and code structure using **Angular best practices**
+- Styling with **Angular Material**
+- **CI/CD pipeline** with GitHub Actions
+- Experience working with backend (**NestJS**, **MongoDB**) and APIs
+- Real-world project flow: from MVP to full-stack SaaS
+- Open-source development using Git & GitHub
 
-## Further help
+---
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## 🚀 Getting Started
+
+### 🔧 Installation (Frontend Only)
+
+```bash
+# Clone the repository
+git clone https://github.com/MS-LV/polylingo.git
+cd polylingo
+
+# Install dependencies
+npm install
+
+# Run locally
+ng serve
